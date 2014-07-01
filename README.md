@@ -4,7 +4,8 @@ Alternative (Unofficial) Windows Toolset for Programming the MagicShifter
 
 Since there was no user friendly way to programm the MagicShifter (http://magicshifter.net/) gadget, I decided to write my own Windows toolset for this task.
 
-At the moment the tools are in a very early state, but can be used to upload Magic Bitmap files to the MagicShifter with the limitation, that only files with 24 or 8 bits per pixle are supported.
+At the moment the tools are in a very early state, but already can be used to upload Magic Bitmap files to the MagicShifter.
+The current limitation is, that only files with 24 or 8 bits per pixle are supported.
 
 C# Projects in this Repository
 ---------
