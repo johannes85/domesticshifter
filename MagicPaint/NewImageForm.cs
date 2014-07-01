@@ -62,7 +62,7 @@ namespace MagicPaint
             }
             catch (MagicBitmapException ex)
             {
-                MessageBox.Show(String.Format("Couldn't create Magic Bitmap: {0}",ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error));
+                MessageBox.Show(String.Format("Couldn't create Magic Bitmap: {0}",ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
