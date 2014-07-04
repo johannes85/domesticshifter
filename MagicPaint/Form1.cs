@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MagicShifter;
 using Uploader;
+using System.Drawing.Imaging;
 
 namespace MagicPaint
 {
@@ -53,7 +54,14 @@ namespace MagicPaint
             SetCurrentTool(MagicPixler.Tool.Brush);
             magicPixler1.OnColorChoose += magicPixler1_OnColorChoose;
 
+            btnAbout.Click += btnAbout_Click;
+
             SetZoomLevel(trackZoom.Value);
+        }
+
+        void btnAbout_Click(object sender, EventArgs e)
+        {
+            btnImportImage_Click(null, null);
         }
 
         void magicPixler1_OnColorChoose(object sender, Color e)
@@ -63,17 +71,17 @@ namespace MagicPaint
 
         private void btnColorPicker_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnToolColorPicker_Click(object sender, EventArgs e)
         {
-            SetCurrentTool(MagicPixler.Tool.ColorPicker); 
+            SetCurrentTool(MagicPixler.Tool.ColorPicker);
         }
 
         private void btnToolBrush_Click_1(object sender, EventArgs e)
         {
-            SetCurrentTool(MagicPixler.Tool.Brush); 
+            SetCurrentTool(MagicPixler.Tool.Brush);
         }
 
         private void pnlCurrentColor_Click(object sender, EventArgs e)
@@ -194,7 +202,8 @@ namespace MagicPaint
             {
                 Bitmap newImage = new Bitmap(openFileDialog1.FileName);
                 Bitmap newFrame = new Bitmap(bitmap.Width, bitmap.Height);
-                using (Graphics g = Graphics.FromImage(newFrame)) {
+                using (Graphics g = Graphics.FromImage(newFrame))
+                {
                     g.DrawImage(newImage, 0, 0);
                 }
                 bitmap.AddFrame(newFrame);
@@ -217,7 +226,7 @@ namespace MagicPaint
             catch (MagicBitmapException ex)
             {
                 MessageBox.Show(String.Format("Couldnt remove frame ({0})", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
+            }
         }
 
         private void RefreshGui()
@@ -271,6 +280,53 @@ namespace MagicPaint
         private void SetZoomLevel(int percent)
         {
             magicPixler1.PixelSize = (int)Math.Round(1.0 / 100.0 * percent, 0);
+        }
+
+        private void btnImportImage_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "GIF|*.gif|PNG|*.png";
+            openFileDialog1.Multiselect = false;
+            DialogResult res = openFileDialog1.ShowDialog();
+            if (res == System.Windows.Forms.DialogResult.OK)
+            {
+                var image = Image.FromFile(openFileDialog1.FileName);
+
+                //Bitmap lbBMP = new Bitmap(image);
+                var lbBMP = image;
+                int width = lbBMP.Width;
+
+                MagicBitmap myBitmap = new MagicBitmap(MagicBitmap.SubType.Bitmap, width, 16, 
+                    MagicBitmap.BitTypes.Type24bit,0,100);
+
+                FrameDimension dimension = new FrameDimension(lbBMP.FrameDimensionsList[0]);
+
+                //lbBMP.GetFrameCount(dimension)
+                for (int frameNr = 0; frameNr < lbBMP.GetFrameCount(dimension); frameNr++) 
+                {   
+                    var bitmapFrame= lbBMP.SelectActiveFrame(dimension, frameNr);
+                    myBitmap.AddFrame(new Bitmap(lbBMP));
+                //    List<byte> lbBytes = new List<byte>();
+                //    lbBMP.SelectActiveFrame(null, frameNr);
+
+                //    for (int liY = 0; liY < lbBMP.Height; liY++)
+                //    {
+                //        for (int liX = 0; liX < lbBMP.Width; liX++)
+                //        {
+                //            Color lcCol = lbBMP.GetPixel(liX, liY);
+                //            lbBytes.AddRange(new[] { lcCol.R, lcCol.G, lcCol.B });
+                //        }
+                //    }
+                }
+
+          
+
+                
+
+                bitmap = myBitmap;
+                currentFrame = 0;
+                RefreshGui();
+            }
         }
     }
 }
