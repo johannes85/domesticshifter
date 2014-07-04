@@ -79,6 +79,9 @@ namespace Uploader
                 numSector.Maximum = 255;
                 numSector.Value = 128;
             }
+
+            btnAutodetectDevice_Click(null, null);
+
         }
 
         private void AddFileInfoToList(String key, String value)
