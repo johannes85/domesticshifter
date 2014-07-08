@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UploaderForm));
             this.btnAutodetectDevice = new System.Windows.Forms.Button();
             this.btnUpload = new System.Windows.Forms.Button();
             this.lstSerialDevices = new System.Windows.Forms.ComboBox();
@@ -155,10 +156,11 @@
             this.Controls.Add(this.btnUpload);
             this.Controls.Add(this.picturePreview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "UploaderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Magic Upload";
+            this.Text = "Upload";
             this.Load += new System.EventHandler(this.UploaderForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picturePreview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSector)).EndInit();

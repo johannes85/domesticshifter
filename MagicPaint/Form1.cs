@@ -13,8 +13,7 @@
  * Author: Johannes Zinnau (johannes@johnimedia.de)
  * 
  * License:
- * Creative Commons: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
- * http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * GNU GENERAL PUBLIC LICENSE Version 3
  *
  */
 
@@ -23,6 +22,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,6 +100,7 @@ namespace MagicPaint
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Title = "Open";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "Magic Bitmap|*.magicBitmap|Magic Font|*.magicFont";
             openFileDialog1.Multiselect = false;
@@ -107,6 +108,38 @@ namespace MagicPaint
             if (res == System.Windows.Forms.DialogResult.OK)
             {
                 bitmap = new MagicBitmap(openFileDialog1.FileName);
+                currentFrame = 0;
+                RefreshGui();
+            }
+        }
+
+        private void btnImportFile_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "Import Image";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "Image File(*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
+            openFileDialog1.Multiselect = false;
+            DialogResult res = openFileDialog1.ShowDialog();
+            if (res == System.Windows.Forms.DialogResult.OK)
+            {
+                Bitmap sourceImage = new Bitmap(openFileDialog1.FileName);
+                int targetHeight = sourceImage.Height > 16 ? 16 : sourceImage.Height;
+                MagicBitmap newBitmap = new MagicBitmap(MagicBitmap.SubType.Bitmap, sourceImage.Width, targetHeight, MagicBitmap.BitTypes.Type24bit, 0, 100);
+
+                FrameDimension dimension = new FrameDimension(sourceImage.FrameDimensionsList[0]);
+                for (int frame = 0; frame < sourceImage.GetFrameCount(dimension); frame++)
+                {
+                    sourceImage.SelectActiveFrame(dimension, frame);
+                    Bitmap newFrame = new Bitmap(newBitmap.Width, newBitmap.Height);
+                    using (Graphics g = Graphics.FromImage(newFrame))
+                    {
+                        g.DrawImage(sourceImage, 0, 0);
+                    }
+                    newBitmap.AddFrame(newFrame);
+                }
+
+                newBitmap.RemoveFrame(0);
+                bitmap = newBitmap;
                 currentFrame = 0;
                 RefreshGui();
             }
@@ -134,7 +167,8 @@ namespace MagicPaint
 
         private void btnUploadToDevice_Click(object sender, EventArgs e)
         {
-            UploaderForm form = new UploaderForm(bitmap.FilePath);
+            UploaderForm form = new UploaderForm(bitmap.FilePath, true);
+            form.StandaloneWindow = false;
             form.ShowDialog(this);
         }
 
@@ -186,8 +220,9 @@ namespace MagicPaint
 
         private void btnAddFrameFromImage_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Title = "Import Image as Frame";
             openFileDialog1.FileName = "";
-            openFileDialog1.Filter = "Image Files(*.bmp;*.jpg;*.jpeg;*.gif)|*.bmp;*.jpg;*.jpeg;*.gif";
+            openFileDialog1.Filter = "Image File(*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
             openFileDialog1.Multiselect = false;
             DialogResult res = openFileDialog1.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)

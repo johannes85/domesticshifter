@@ -12,8 +12,7 @@
  * Author: Johannes Zinnau (johannes@johnimedia.de)
  * 
  * License:
- * Creative Commons: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
- * http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * GNU GENERAL PUBLIC LICENSE Version 3
  *
  */
 
@@ -70,7 +69,7 @@ namespace MagicShifter
             Width = width;
             if (height < 1 || height > 16)
             {
-                throw new MagicBitmapException(String.Format("Invalid height: {0}", Height));
+                throw new MagicBitmapException(String.Format("Invalid height: {0}", height));
             }
             Height = height;
             BitPerPixel = bitsPerPixel;

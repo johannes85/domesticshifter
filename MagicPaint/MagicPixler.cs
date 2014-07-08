@@ -13,8 +13,7 @@
  * Author: Johannes Zinnau (johannes@johnimedia.de)
  * 
  * License:
- * Creative Commons: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
- * http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * GNU GENERAL PUBLIC LICENSE Version 3
  *
  */
 
@@ -46,6 +45,7 @@ namespace MagicPaint
 
         public event EventHandler<Color> OnColorChoose;
 
+        public Boolean EditEnabled { get; set; }
         public Tool CurrentTool { get; set; }
         public Color CurrentColor { get; set; }
         public int PixelSize
@@ -84,6 +84,7 @@ namespace MagicPaint
             mouseDown = false;
             CurrentTool = Tool.Brush;
             CurrentColor = Color.White;
+            EditEnabled = true;
         }
 
         public void LoadImage(Bitmap image)
@@ -154,7 +155,7 @@ namespace MagicPaint
 
         private void UseTool(int x, int y)
         {
-            if (x >= 0 && x < image.Width && y >= 0 && y < image.Height)
+            if (x >= 0 && x < image.Width && y >= 0 && y < image.Height && EditEnabled == true)
             {
                 if (CurrentTool == Tool.Brush)
                 {

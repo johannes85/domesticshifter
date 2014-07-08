@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio Express 2013 for Windows Desktop
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicShifter", "MagicShifter\MagicShifter.csproj", "{EB23D016-AE45-4868-B76E-CC67F34803F9}"
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicPaint", "MagicPaint\MagicPaint.csproj", "{AF7984EC-BD18-43BB-BA83-00E9F3E05DD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Uploader", "Uploader\Uploader.csproj", "{27391118-071E-45A0-8C85-248C8B61B412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MagicUploader", "MagicUploader\MagicUploader.csproj", "{0D8CB49B-AD53-43DA-86D6-6D0DE4348C35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{27391118-071E-45A0-8C85-248C8B61B412}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27391118-071E-45A0-8C85-248C8B61B412}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27391118-071E-45A0-8C85-248C8B61B412}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D8CB49B-AD53-43DA-86D6-6D0DE4348C35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D8CB49B-AD53-43DA-86D6-6D0DE4348C35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D8CB49B-AD53-43DA-86D6-6D0DE4348C35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D8CB49B-AD53-43DA-86D6-6D0DE4348C35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

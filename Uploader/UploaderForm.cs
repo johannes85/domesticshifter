@@ -12,8 +12,7 @@
  * Author: Johannes Zinnau (johannes@johnimedia.de)
  * 
  * License:
- * Creative Commons: Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
- * http://creativecommons.org/licenses/by-nc-sa/4.0/
+ * GNU GENERAL PUBLIC LICENSE Version 3
  *
  */
 
@@ -36,48 +35,92 @@ namespace Uploader
         private String filePath;
         private DeviceFinder devices;
         private MagicBitmap bitmap;
+        private Boolean autodetect;
+
+        public Boolean StandaloneWindow
+        {
+            set
+            {
+                if (value)
+                {
+                    FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+                    ShowInTaskbar = true;
+                    StartPosition = FormStartPosition.CenterScreen;
+                    btnCancel.Text = "Quit";
+                }
+                else
+                {
+                    FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+                    ShowInTaskbar = false;
+                    StartPosition = FormStartPosition.CenterParent;
+                    btnCancel.Text = "Cancel";
+                }
+            }
+        }
 
         public UploaderForm(String filePath)
         {
             InitializeComponent();
 
             this.filePath = filePath;
+            this.autodetect = false;
+        }
+
+        public UploaderForm(String filePath, Boolean autodetect)
+        {
+            InitializeComponent();
+
+            this.filePath = filePath;
+            this.autodetect = autodetect;
         }
 
         private void UploaderForm_Load(object sender, EventArgs e)
         {
-            devices = new DeviceFinder();
-            lstSerialDevices.Items.AddRange(devices.GetAllSerialDevices());
-
-            bitmap = new MagicBitmap(filePath);
-
-            lstFileInfos.Items.Clear();
-            AddFileInfoToList("Size", bitmap.FileSize.ToString());
-            AddFileInfoToList("Type", bitmap.Type.ToString());
-            AddFileInfoToList("Width", bitmap.Width.ToString());
-            AddFileInfoToList("Height", bitmap.Height.ToString());
-            AddFileInfoToList("BitPerPixel", bitmap.BitPerPixel.GetHashCode().ToString());
-            AddFileInfoToList("Frames", bitmap.FramesCount.ToString());
-            AddFileInfoToList("DelayMs", bitmap.DelayMs.ToString());
-            AddFileInfoToList("FirstChar", bitmap.FirstChar.ToString());
-
-            if (bitmap.Type == MagicBitmap.SubType.Bitmap)
+            try
             {
-                picturePreview.Image = bitmap.GetFrame(0);
-                picturePreview.SizeMode = PictureBoxSizeMode.Zoom;
+                devices = new DeviceFinder();
+                lstSerialDevices.Items.AddRange(devices.GetAllSerialDevices());
+
+                bitmap = new MagicBitmap(filePath);
+
+                lstFileInfos.Items.Clear();
+                AddFileInfoToList("Size", bitmap.FileSize.ToString());
+                AddFileInfoToList("Type", bitmap.Type.ToString());
+                AddFileInfoToList("Width", bitmap.Width.ToString());
+                AddFileInfoToList("Height", bitmap.Height.ToString());
+                AddFileInfoToList("BitPerPixel", bitmap.BitPerPixel.GetHashCode().ToString());
+                AddFileInfoToList("Frames", bitmap.FramesCount.ToString());
+                AddFileInfoToList("DelayMs", bitmap.DelayMs.ToString());
+                AddFileInfoToList("FirstChar", bitmap.FirstChar.ToString());
+
+                if (bitmap.Type == MagicBitmap.SubType.Bitmap)
+                {
+                    picturePreview.Image = bitmap.GetFrame(0);
+                    picturePreview.SizeMode = PictureBoxSizeMode.Zoom;
+                }
+
+                if (bitmap.Type == MagicBitmap.SubType.Bitmap)
+                {
+                    numSector.Minimum = 1;
+                    numSector.Maximum = 127;
+                    numSector.Value = 1;
+                }
+                else if (bitmap.Type == MagicBitmap.SubType.Font)
+                {
+                    numSector.Minimum = 128;
+                    numSector.Maximum = 255;
+                    numSector.Value = 128;
+                }
+
+                if (autodetect)
+                {
+                    autodetectDevice();
+                }
             }
-
-            if (bitmap.Type == MagicBitmap.SubType.Bitmap) 
+            catch (MagicBitmapException ex)
             {
-                numSector.Minimum = 1;
-                numSector.Maximum = 127;
-                numSector.Value = 1;
-            }
-            else if (bitmap.Type == MagicBitmap.SubType.Font)
-            {
-                numSector.Minimum = 128;
-                numSector.Maximum = 255;
-                numSector.Value = 128;
+                MessageBox.Show(String.Format("Couldn't read file: {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
             }
         }
 
@@ -90,24 +133,7 @@ namespace Uploader
 
         private void btnAutodetectDevice_Click(object sender, EventArgs e)
         {
-            Enabled = false;
-
-            try
-            {
-                lstSerialDevices.Items.Clear();
-                lstSerialDevices.Items.AddRange(devices.GetAllSerialDevices());
-
-                using (Device device = devices.Find())
-                {
-                    lstSerialDevices.SelectedIndex = lstSerialDevices.Items.IndexOf(device.PortName);
-                }
-            }
-            catch (DeviceFinderException)
-            {
-                MessageBox.Show("Couldn't found device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            Enabled = true;
+            autodetectDevice();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -145,6 +171,27 @@ namespace Uploader
             Enabled = true;
         }
 
+        private void autodetectDevice()
+        {
+            Enabled = false;
+
+            try
+            {
+                lstSerialDevices.Items.Clear();
+                lstSerialDevices.Items.AddRange(devices.GetAllSerialDevices());
+
+                using (Device device = devices.Find())
+                {
+                    lstSerialDevices.SelectedIndex = lstSerialDevices.Items.IndexOf(device.PortName);
+                }
+            }
+            catch (DeviceFinderException)
+            {
+                MessageBox.Show("Couldn't found device", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            Enabled = true;
+        }
 
     }
 }
