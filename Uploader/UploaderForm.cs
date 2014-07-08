@@ -122,6 +122,9 @@ namespace Uploader
                 MessageBox.Show(String.Format("Couldn't read file: {0}", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
+
+            btnAutodetectDevice_Click(null, null);
+
         }
 
         private void AddFileInfoToList(String key, String value)
