@@ -308,6 +308,17 @@ namespace MagicPaint
 
         private void SetCurrentTool(MagicPixler.Tool tool)
         {
+            btnToolBrush.Enabled = true;
+            btnToolColorPicker.Enabled = true;
+            switch (tool)
+            {
+                case MagicPixler.Tool.Brush:
+                    btnToolBrush.Enabled = false;
+                    break;
+                case MagicPixler.Tool.ColorPicker:
+                    btnToolColorPicker.Enabled = false;
+                    break;
+            }
             magicPixler1.CurrentTool = tool;
         }
 
