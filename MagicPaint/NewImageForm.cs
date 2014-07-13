@@ -43,6 +43,8 @@ namespace MagicPaint
         {
             lstBitsPerPixle.Items.Add(MagicBitmap.BitTypes.Type24bit);
             lstBitsPerPixle.Items.Add(MagicBitmap.BitTypes.Type8bit);
+            // Sooooon, soooooon
+            // lstBitsPerPixle.Items.Add(MagicBitmap.BitTypes.Type1bit);
             lstBitsPerPixle.SelectedIndex = 0;
         }
 

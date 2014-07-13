@@ -37,6 +37,7 @@ namespace MagicPaint
         private MagicBitmap bitmap;
         private int currentFrame;
         private Boolean frameChanged;
+        private Color currentColor;
 
         private Boolean FrameChanged
         {
@@ -109,11 +110,6 @@ namespace MagicPaint
         void magicPixler1_OnColorChoose(object sender, Color e)
         {
             SetCurrentColor(e);
-        }
-
-        private void btnColorPicker_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void btnToolColorPicker_Click(object sender, EventArgs e)
@@ -318,6 +314,8 @@ namespace MagicPaint
                     palette1.Type = Palette.ColorType.Type24bit;
                     break;
             }
+            // Triggers conversion from one biot type to another if changed
+            SetCurrentColor(currentColor);
         }
 
         private void RefreshGui()
@@ -390,7 +388,6 @@ namespace MagicPaint
             }
             SetCurrentFrameNumber(frameNumber);
         }
-        
 
         private void SetCurrentFrameNumber(int frameNumber)
         {
@@ -403,8 +400,33 @@ namespace MagicPaint
 
         private void SetCurrentColor(Color color)
         {
-            pnlCurrentColor.BackColor = color;
-            magicPixler1.CurrentColor = color;
+            Color convertedColor = ConvertColorToBitType(color);
+            pnlCurrentColor.BackColor = convertedColor;
+            magicPixler1.CurrentColor = convertedColor;
+            currentColor = convertedColor;
+        }
+
+        private Color ConvertColorToBitType(Color color)
+        {
+            if (Bitmap != null)
+            {
+                switch (Bitmap.BitPerPixel)
+                {
+                    case MagicBitmap.BitTypes.Type1bit:
+                        int colorComponent = (int)Math.Round((color.R + color.G + color.B) / 3.0);
+                        colorComponent = colorComponent > 127 ? 255 : 0;
+                        color = Color.FromArgb(colorComponent, colorComponent, colorComponent);
+                        break;
+                    case MagicBitmap.BitTypes.Type8bit:
+                        int colorComponent2 = (int)Math.Round((color.R + color.G + color.B) / 3.0);
+                        color = Color.FromArgb(colorComponent2, colorComponent2, colorComponent2);
+                        break;
+                    case MagicBitmap.BitTypes.Type24bit:
+                        break;
+                }
+            }
+
+            return color;
         }
 
         private void SetZoomLevel(int percent)

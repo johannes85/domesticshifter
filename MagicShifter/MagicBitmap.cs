@@ -100,7 +100,7 @@ namespace MagicShifter
                 }
                 FileSize = header[1] << 16 | header[2] << 8 | header[3];
                 switch (header[4]) {
-                    // Will be iomplemented later
+                    // Will be implemented later
                     //case 1:
                         //BitPerPixel = BitTypes.Type1bit;
                         //break;
