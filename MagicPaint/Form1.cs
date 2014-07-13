@@ -36,6 +36,29 @@ namespace MagicPaint
     {
         private MagicBitmap bitmap;
         private int currentFrame;
+        private Boolean frameChanged;
+
+        private Boolean FrameChanged
+        {
+            get
+            {
+                return frameChanged;
+            }
+
+            set
+            {
+                frameChanged = value;
+
+                if (frameChanged)
+                {
+                    btnSaveFrame.Enabled = true;
+                }
+                else
+                {
+                    btnSaveFrame.Enabled = false;
+                }
+            }
+        }
 
         public Form1()
         {
@@ -52,8 +75,15 @@ namespace MagicPaint
             SetCurrentColor(Color.White);
             SetCurrentTool(MagicPixler.Tool.Brush);
             magicPixler1.OnColorChoose += magicPixler1_OnColorChoose;
+            magicPixler1.OnChanged += magicPixler1_OnChanged;
 
             SetZoomLevel(trackZoom.Value);
+            FrameChanged = false;
+        }
+
+        void magicPixler1_OnChanged(object sender, EventArgs e)
+        {
+            FrameChanged = true;
         }
 
         void magicPixler1_OnColorChoose(object sender, Color e)
@@ -179,14 +209,14 @@ namespace MagicPaint
 
         private void trackFrames_Scroll(object sender, EventArgs e)
         {
-            SetCurrentFrameNumber(trackFrames.Value);
+            SetCurrentFrameNumberUser(trackFrames.Value);
         }
 
         private void btnPreviousFrame_Click(object sender, EventArgs e)
         {
             if (currentFrame > 0)
             {
-                SetCurrentFrameNumber(currentFrame - 1);
+                SetCurrentFrameNumberUser(currentFrame - 1);
             }
         }
 
@@ -194,15 +224,13 @@ namespace MagicPaint
         {
             if (currentFrame < bitmap.RealFramesCount - 1)
             {
-                SetCurrentFrameNumber(currentFrame + 1);
+                SetCurrentFrameNumberUser(currentFrame + 1);
             }
         }
 
         private void btnSaveFrame_Click(object sender, EventArgs e)
         {
-            Bitmap changedImage = magicPixler1.GetImage();
-            bitmap.ReplaceFrame(currentFrame, changedImage);
-            SetCurrentFrameNumber(currentFrame);
+            SaveCurrentFrame();
         }
 
         private void btnResetFrame_Click(object sender, EventArgs e)
@@ -212,7 +240,7 @@ namespace MagicPaint
 
         private void btnAddFrame_Click(object sender, EventArgs e)
         {
-            btnSaveFrame_Click(sender, e);
+            SetCurrentFrameNumberUser(currentFrame); // Trigger message box if frame isn't saved
             bitmap.AddFrame(bitmap.GenerateBlankFrame());
             RefreshGui();
             SetCurrentFrameNumber(bitmap.RealFramesCount - 1);
@@ -220,6 +248,7 @@ namespace MagicPaint
 
         private void btnAddFrameFromImage_Click(object sender, EventArgs e)
         {
+            SetCurrentFrameNumberUser(currentFrame); // Trigger message box if frame isn't saved
             openFileDialog1.Title = "Import Image as Frame";
             openFileDialog1.FileName = "";
             openFileDialog1.Filter = "Image File(*.bmp;*.jpg;*.jpeg;*.gif;*.png)|*.bmp;*.jpg;*.jpeg;*.gif;*.png";
@@ -289,12 +318,40 @@ namespace MagicPaint
             lstFileInfos.Items.Add(item);
         }
 
+        private void SaveCurrentFrame()
+        {
+            Bitmap changedImage = magicPixler1.GetImage();
+            bitmap.ReplaceFrame(currentFrame, changedImage);
+            SetCurrentFrameNumber(currentFrame);
+        }
+
+        private void SetCurrentFrameNumberUser(int frameNumber)
+        {
+            if (FrameChanged)
+            {
+                DialogResult res = MessageBox.Show("The current frame has been changed.\nDo you want to save the frame?", "Frame changed", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch (res)
+                {
+                    case System.Windows.Forms.DialogResult.Yes:
+                        SaveCurrentFrame();
+                        break;
+                    case System.Windows.Forms.DialogResult.No:
+                        break;
+                    default:
+                        return;
+                }
+            }
+            SetCurrentFrameNumber(frameNumber);
+        }
+        
+
         private void SetCurrentFrameNumber(int frameNumber)
         {
             currentFrame = frameNumber;
             trackFrames.Value = currentFrame;
             lblFrameNumber.Text = currentFrame.ToString();
             magicPixler1.LoadImage(bitmap.GetFrame(currentFrame));
+            FrameChanged = false;
         }
 
         private void SetCurrentColor(Color color)

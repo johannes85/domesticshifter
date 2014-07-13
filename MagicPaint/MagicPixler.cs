@@ -44,6 +44,7 @@ namespace MagicPaint
         private int pixelSize = 16;
 
         public event EventHandler<Color> OnColorChoose;
+        public event EventHandler OnChanged;
 
         public Boolean EditEnabled { get; set; }
         public Tool CurrentTool { get; set; }
@@ -160,6 +161,10 @@ namespace MagicPaint
                 if (CurrentTool == Tool.Brush)
                 {
                     image.SetPixel(x, y, CurrentColor);
+                    if (OnChanged != null)
+                    {
+                        OnChanged(this, null);
+                    }
                 }
                 else if (CurrentTool == Tool.ColorPicker)
                 {
