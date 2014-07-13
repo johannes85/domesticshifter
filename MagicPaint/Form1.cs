@@ -194,26 +194,26 @@ namespace MagicPaint
         private void btnSave_Click(object sender, EventArgs e)
         {
             btnSaveFrame_Click(sender, e);
-            bitmap.Save();
+            Bitmap.Save();
             RefreshGui();
         }
 
         private void btnSaveAs_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.FileName = bitmap.Type == MagicBitmap.SubType.Font ? "*.magicFont" : "*.magicBitmap";
+            saveFileDialog1.FileName = Bitmap.Type == MagicBitmap.SubType.Font ? "*.magicFont" : "*.magicBitmap";
             saveFileDialog1.Filter = "Magic Bitmap(*.magicBitmap)|*.magicBitmap|Magic Font(*.magicFont)|*.magicFont";
             DialogResult res = saveFileDialog1.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
                 btnSaveFrame_Click(sender, e);
-                bitmap.Save(saveFileDialog1.FileName);
+                Bitmap.Save(saveFileDialog1.FileName);
                 RefreshGui();
             }
         }
 
         private void btnUploadToDevice_Click(object sender, EventArgs e)
         {
-            UploaderForm form = new UploaderForm(bitmap.FilePath, true);
+            UploaderForm form = new UploaderForm(Bitmap.FilePath, true);
             form.StandaloneWindow = false;
             form.ShowDialog(this);
         }
@@ -238,7 +238,7 @@ namespace MagicPaint
 
         private void btnNextFrame_Click(object sender, EventArgs e)
         {
-            if (currentFrame < bitmap.RealFramesCount - 1)
+            if (currentFrame < Bitmap.RealFramesCount - 1)
             {
                 SetCurrentFrameNumberUser(currentFrame + 1);
             }
@@ -257,9 +257,9 @@ namespace MagicPaint
         private void btnAddFrame_Click(object sender, EventArgs e)
         {
             SetCurrentFrameNumberUser(currentFrame); // Trigger message box if frame isn't saved
-            bitmap.AddFrame(bitmap.GenerateBlankFrame());
+            Bitmap.AddFrame(Bitmap.GenerateBlankFrame());
             RefreshGui();
-            SetCurrentFrameNumber(bitmap.RealFramesCount - 1);
+            SetCurrentFrameNumber(Bitmap.RealFramesCount - 1);
         }
 
         private void btnAddFrameFromImage_Click(object sender, EventArgs e)
@@ -273,13 +273,13 @@ namespace MagicPaint
             if (res == System.Windows.Forms.DialogResult.OK)
             {
                 Bitmap newImage = new Bitmap(openFileDialog1.FileName);
-                Bitmap newFrame = new Bitmap(bitmap.Width, bitmap.Height);
+                Bitmap newFrame = new Bitmap(Bitmap.Width, Bitmap.Height);
                 using (Graphics g = Graphics.FromImage(newFrame)) {
                     g.DrawImage(newImage, 0, 0);
                 }
-                bitmap.AddFrame(newFrame);
+                Bitmap.AddFrame(newFrame);
                 RefreshGui();
-                SetCurrentFrameNumber(bitmap.RealFramesCount - 1);
+                SetCurrentFrameNumber(Bitmap.RealFramesCount - 1);
             }
         }
 
@@ -287,10 +287,10 @@ namespace MagicPaint
         {
             try
             {
-                bitmap.RemoveFrame(currentFrame);
-                if (currentFrame >= bitmap.RealFramesCount)
+                Bitmap.RemoveFrame(currentFrame);
+                if (currentFrame >= Bitmap.RealFramesCount)
                 {
-                    currentFrame = bitmap.RealFramesCount - 1;
+                    currentFrame = Bitmap.RealFramesCount - 1;
                 }
                 RefreshGui();
             }
@@ -302,7 +302,7 @@ namespace MagicPaint
 
         private void RefreshGuiAfteBitmapSet()
         {
-            switch (bitmap.BitPerPixel)
+            switch (Bitmap.BitPerPixel)
             {
                 case MagicBitmap.BitTypes.Type1bit:
                     palette1.Type = Palette.ColorType.Type1bit;
@@ -321,21 +321,21 @@ namespace MagicPaint
         private void RefreshGui()
         {
             trackFrames.Minimum = 0;
-            trackFrames.Maximum = bitmap.RealFramesCount - 1;
+            trackFrames.Maximum = Bitmap.RealFramesCount - 1;
             SetCurrentFrameNumber(currentFrame);
 
             lstFileInfos.Items.Clear();
-            AddFileInfoToList("Size", bitmap.FileSize.ToString());
-            AddFileInfoToList("Type", bitmap.Type.ToString());
-            AddFileInfoToList("Width", bitmap.Width.ToString());
-            AddFileInfoToList("Height", bitmap.Height.ToString());
-            AddFileInfoToList("BitPerPixel", bitmap.BitPerPixel.GetHashCode().ToString());
-            AddFileInfoToList("Frames", bitmap.FramesCount.ToString());
-            AddFileInfoToList("DelayMs", bitmap.DelayMs.ToString());
-            AddFileInfoToList("FirstChar", bitmap.FirstChar.ToString());
+            AddFileInfoToList("Size", Bitmap.FileSize.ToString());
+            AddFileInfoToList("Type", Bitmap.Type.ToString());
+            AddFileInfoToList("Width", Bitmap.Width.ToString());
+            AddFileInfoToList("Height", Bitmap.Height.ToString());
+            AddFileInfoToList("BitPerPixel", Bitmap.BitPerPixel.GetHashCode().ToString());
+            AddFileInfoToList("Frames", Bitmap.FramesCount.ToString());
+            AddFileInfoToList("DelayMs", Bitmap.DelayMs.ToString());
+            AddFileInfoToList("FirstChar", Bitmap.FirstChar.ToString());
 
-            btnUploadToDevice.Enabled = bitmap.FilePath != null;
-            btnSave.Enabled = bitmap.FilePath != null;
+            btnUploadToDevice.Enabled = Bitmap.FilePath != null;
+            btnSave.Enabled = Bitmap.FilePath != null;
             btnSaveAs.Enabled = true;
             pnlFrames.Enabled = true;
         }
@@ -366,7 +366,7 @@ namespace MagicPaint
         private void SaveCurrentFrame()
         {
             Bitmap changedImage = magicPixler1.GetImage();
-            bitmap.ReplaceFrame(currentFrame, changedImage);
+            Bitmap.ReplaceFrame(currentFrame, changedImage);
             SetCurrentFrameNumber(currentFrame);
         }
 
@@ -394,7 +394,7 @@ namespace MagicPaint
             currentFrame = frameNumber;
             trackFrames.Value = currentFrame;
             lblFrameNumber.Text = currentFrame.ToString();
-            magicPixler1.LoadImage(bitmap.GetFrame(currentFrame));
+            magicPixler1.LoadImage(Bitmap.GetFrame(currentFrame));
             FrameChanged = false;
         }
 
