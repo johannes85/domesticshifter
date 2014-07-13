@@ -60,6 +60,8 @@
             this.trackZoom = new System.Windows.Forms.TrackBar();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.palette1 = new MagicPaint.Palette();
             this.magicPixler1 = new MagicPaint.MagicPixler();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackFrames)).BeginInit();
@@ -69,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlCurrentColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -162,7 +165,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lstFileInfos);
-            this.groupBox1.Location = new System.Drawing.Point(861, 28);
+            this.groupBox1.Location = new System.Drawing.Point(861, 202);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 181);
             this.groupBox1.TabIndex = 3;
@@ -202,7 +205,7 @@
             this.pnlFrames.Controls.Add(this.btnNextFrame);
             this.pnlFrames.Controls.Add(this.btnPreviousFrame);
             this.pnlFrames.Controls.Add(this.trackFrames);
-            this.pnlFrames.Location = new System.Drawing.Point(861, 215);
+            this.pnlFrames.Location = new System.Drawing.Point(861, 389);
             this.pnlFrames.Name = "pnlFrames";
             this.pnlFrames.Size = new System.Drawing.Size(200, 120);
             this.pnlFrames.TabIndex = 4;
@@ -359,6 +362,27 @@
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.palette1);
+            this.groupBox2.Location = new System.Drawing.Point(861, 28);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 168);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Palette";
+            // 
+            // palette1
+            // 
+            this.palette1.BackColor = System.Drawing.Color.White;
+            this.palette1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("palette1.BackgroundImage")));
+            this.palette1.Location = new System.Drawing.Point(7, 19);
+            this.palette1.Name = "palette1";
+            this.palette1.Size = new System.Drawing.Size(187, 143);
+            this.palette1.TabIndex = 0;
+            this.palette1.Type = MagicPaint.Palette.ColorType.Type1bit;
+            // 
             // magicPixler1
             // 
             this.magicPixler1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -380,6 +404,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 579);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.trackZoom);
             this.Controls.Add(this.panel1);
@@ -401,6 +426,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pnlCurrentColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,6 +466,8 @@
         private System.Windows.Forms.Button btnAddFrame;
         private System.Windows.Forms.Button btnAddFrameFromImage;
         private System.Windows.Forms.ToolStripButton btnAbout;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private Palette palette1;
     }
 }
 

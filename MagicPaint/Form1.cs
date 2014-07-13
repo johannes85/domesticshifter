@@ -60,6 +60,18 @@ namespace MagicPaint
             }
         }
 
+        private MagicBitmap Bitmap
+        {
+            get
+            {
+                return (bitmap);
+            }
+            set {
+                bitmap = value;
+                RefreshGuiAfteBitmapSet();
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -79,6 +91,14 @@ namespace MagicPaint
 
             SetZoomLevel(trackZoom.Value);
             FrameChanged = false;
+
+            palette1.Type = Palette.ColorType.Type24bit;
+            palette1.OnColorPicked += palette1_OnColorPicked;
+        }
+
+        void palette1_OnColorPicked(object sender, Color e)
+        {
+            SetCurrentColor(e);
         }
 
         void magicPixler1_OnChanged(object sender, EventArgs e)
@@ -122,7 +142,7 @@ namespace MagicPaint
             form.ShowDialog(this);
             if (form.bitmap != null)
             {
-                bitmap = form.bitmap;
+                Bitmap = form.bitmap;
                 currentFrame = 0;
                 RefreshGui();
             }
@@ -137,7 +157,7 @@ namespace MagicPaint
             DialogResult res = openFileDialog1.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
-                bitmap = new MagicBitmap(openFileDialog1.FileName);
+                Bitmap = new MagicBitmap(openFileDialog1.FileName);
                 currentFrame = 0;
                 RefreshGui();
             }
@@ -169,7 +189,7 @@ namespace MagicPaint
                 }
 
                 newBitmap.RemoveFrame(0);
-                bitmap = newBitmap;
+                Bitmap = newBitmap;
                 currentFrame = 0;
                 RefreshGui();
             }
@@ -282,6 +302,22 @@ namespace MagicPaint
             {
                 MessageBox.Show(String.Format("Couldnt remove frame ({0})", ex.Message), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } 
+        }
+
+        private void RefreshGuiAfteBitmapSet()
+        {
+            switch (bitmap.BitPerPixel)
+            {
+                case MagicBitmap.BitTypes.Type1bit:
+                    palette1.Type = Palette.ColorType.Type1bit;
+                    break;
+                case MagicBitmap.BitTypes.Type8bit:
+                    palette1.Type = Palette.ColorType.Type8bit;
+                    break;
+                case MagicBitmap.BitTypes.Type24bit:
+                    palette1.Type = Palette.ColorType.Type24bit;
+                    break;
+            }
         }
 
         private void RefreshGui()
