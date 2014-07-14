@@ -16,7 +16,9 @@ namespace MagicPaint
         private Bitmap buffer;
         private ColorType type;
         private Pen penCursor;
-        private double currentHue;
+        private double currentColorHue;
+        private double currentColorSat;
+        private double currentColorVal;
         private int hueBarWidth;
         private Boolean selectHueMode;
         private Boolean mouseDown;
@@ -46,7 +48,9 @@ namespace MagicPaint
         {
             InitializeComponent();
 
-            currentHue = 0;
+            currentColorHue = 0;
+            currentColorSat = 1.0;
+            currentColorVal = 1.0;
             hueBarWidth = 25;
             mouseDown = false;
             selectHueMode = false;
@@ -117,7 +121,7 @@ namespace MagicPaint
                 for (int x = 0; x <= pickerWidth; x++)
                 {
                     int sat = (int)Math.Round(100.0 / (double)pickerWidth * (double)x);
-                    buffer.SetPixel(x, y, ColorFromHSV(currentHue, (double)sat * 0.01, (double)val * 0.01));
+                    buffer.SetPixel(x, y, ColorFromHSV(currentColorHue, (double)sat * 0.01, (double)val * 0.01));
                 }
 
                 double hue = 359.0 / (double)Height * (double)y;
@@ -167,17 +171,28 @@ namespace MagicPaint
         {
             if (x > 0 && y > 0 && x < Width && y < Height)
             {
+                int startHueBar = Width - hueBarWidth;
+
                 if (selectHueMode)
                 {
-                    currentHue = 359.0 / (double)Height * (double)y;
-                    RefreshPalette();
+                    if (x >= startHueBar)
+                    {
+                        currentColorHue = 359.0 / (double)Height * (double)y;
+                        Color color = ColorFromHSV(currentColorHue, currentColorSat, currentColorVal);
+                        RefreshPalette();
+
+                        if (OnColorPicked != null)
+                        {
+                            OnColorPicked(this, color);
+                        }
+                    }
                 }
                 else
                 {
-                    int startHueBar = Width - hueBarWidth;
                     if (x < startHueBar)
                     {
                         Color color = ((Bitmap)BackgroundImage).GetPixel(x, y);
+                        ColorToHSV(color, out currentColorHue, out currentColorSat, out currentColorVal);
 
                         if (OnColorPicked != null)
                         {
@@ -218,5 +233,16 @@ namespace MagicPaint
             else
                 return Color.FromArgb(255, v, p, q);
         }
+
+        private void ColorToHSV(Color color, out double hue, out double saturation, out double value)
+        {
+            int max = Math.Max(color.R, Math.Max(color.G, color.B));
+            int min = Math.Min(color.R, Math.Min(color.G, color.B));
+
+            hue = color.GetHue();
+            saturation = (max == 0) ? 0 : 1d - (1d * min / max);
+            value = max / 255d;
+        }
+
     }
 }
