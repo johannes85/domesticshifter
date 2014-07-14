@@ -106,7 +106,7 @@ namespace MagicPaint
 
         private void RefreshEditor()
         {
-            if (image != null)
+            if (image != null && Width > 0 && Height > 0)
             {
                 buffer = new Bitmap(Width, Height);
                 using (Graphics g = Graphics.FromImage(buffer))
@@ -175,6 +175,11 @@ namespace MagicPaint
                     }
                 }
             }
+        }
+
+        private void MagicPixler_Resize(object sender, EventArgs e)
+        {
+            RefreshEditor();
         }
 
         private void MagicPixler_MouseMove(object sender, MouseEventArgs e)

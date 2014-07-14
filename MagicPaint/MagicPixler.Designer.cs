@@ -44,6 +44,7 @@
             this.MouseLeave += new System.EventHandler(this.MagicPixler_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MagicPixler_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MagicPixler_MouseUp);
+            this.Resize += new System.EventHandler(this.MagicPixler_Resize);
             this.ResumeLayout(false);
 
         }
