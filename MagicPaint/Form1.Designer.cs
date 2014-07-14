@@ -86,7 +86,7 @@
             this.btnAbout});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1073, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1024, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -165,7 +165,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.lstFileInfos);
-            this.groupBox1.Location = new System.Drawing.Point(861, 202);
+            this.groupBox1.Location = new System.Drawing.Point(812, 202);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 181);
             this.groupBox1.TabIndex = 3;
@@ -205,7 +205,7 @@
             this.pnlFrames.Controls.Add(this.btnNextFrame);
             this.pnlFrames.Controls.Add(this.btnPreviousFrame);
             this.pnlFrames.Controls.Add(this.trackFrames);
-            this.pnlFrames.Location = new System.Drawing.Point(861, 389);
+            this.pnlFrames.Location = new System.Drawing.Point(812, 389);
             this.pnlFrames.Name = "pnlFrames";
             this.pnlFrames.Size = new System.Drawing.Size(200, 120);
             this.pnlFrames.TabIndex = 4;
@@ -303,7 +303,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(46, 554);
+            this.panel1.Size = new System.Drawing.Size(46, 604);
             this.panel1.TabIndex = 6;
             // 
             // pnlCurrentColor
@@ -342,11 +342,11 @@
             // 
             this.trackZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackZoom.Location = new System.Drawing.Point(74, 540);
+            this.trackZoom.Location = new System.Drawing.Point(74, 590);
             this.trackZoom.Maximum = 3000;
             this.trackZoom.Minimum = 100;
             this.trackZoom.Name = "trackZoom";
-            this.trackZoom.Size = new System.Drawing.Size(781, 45);
+            this.trackZoom.Size = new System.Drawing.Size(732, 45);
             this.trackZoom.TabIndex = 8;
             this.trackZoom.TickFrequency = 10;
             this.trackZoom.Value = 1600;
@@ -356,7 +356,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(56, 548);
+            this.pictureBox1.Location = new System.Drawing.Point(56, 598);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(16, 16);
             this.pictureBox1.TabIndex = 9;
@@ -366,7 +366,7 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.palette1);
-            this.groupBox2.Location = new System.Drawing.Point(861, 28);
+            this.groupBox2.Location = new System.Drawing.Point(812, 28);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 168);
             this.groupBox2.TabIndex = 10;
@@ -381,7 +381,7 @@
             this.palette1.Name = "palette1";
             this.palette1.Size = new System.Drawing.Size(187, 143);
             this.palette1.TabIndex = 0;
-            this.palette1.Type = MagicPaint.Palette.ColorType.Type1bit;
+            this.palette1.Type = MagicPaint.Palette.ColorType.Type24bit;
             // 
             // magicPixler1
             // 
@@ -396,14 +396,14 @@
             this.magicPixler1.Location = new System.Drawing.Point(49, 28);
             this.magicPixler1.Name = "magicPixler1";
             this.magicPixler1.PixelSize = 16;
-            this.magicPixler1.Size = new System.Drawing.Size(806, 506);
+            this.magicPixler1.Size = new System.Drawing.Size(757, 556);
             this.magicPixler1.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 579);
+            this.ClientSize = new System.Drawing.Size(1024, 629);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.trackZoom);
@@ -413,6 +413,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(800, 550);
             this.Name = "Form1";
             this.Text = "MagicPaint";
             this.Load += new System.EventHandler(this.Form1_Load);
