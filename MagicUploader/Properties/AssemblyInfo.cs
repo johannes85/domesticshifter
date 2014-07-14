@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("MagicUploader")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Uploads Magic Bitmaps to the MagicShifter device")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Domestic Hacks")]
 [assembly: AssemblyProduct("MagicUploader")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2014 Domestic Hacks")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

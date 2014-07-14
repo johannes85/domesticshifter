@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MagicShifter")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("MagicShifter .NET Implementation")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Domestic Hacks")]
 [assembly: AssemblyProduct("MagicShifter")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2014 Domestic Hacks")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

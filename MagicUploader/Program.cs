@@ -23,6 +23,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text;
 using Uploader;
 
 namespace MagicUploader
@@ -60,6 +61,16 @@ namespace MagicUploader
             }
             else
             {
+                StringBuilder helpText = new StringBuilder();
+
+                helpText.AppendLine("MagicShifter Upload Tool");
+                helpText.AppendLine(String.Format("v{0}", Application.ProductVersion));
+                helpText.AppendLine("----------------------------------------------------");
+                helpText.AppendLine("Usage:");
+                helpText.AppendLine(String.Format("{0} [MagicBitmapFile]", System.AppDomain.CurrentDomain.FriendlyName));
+
+                MessageBox.Show(helpText.ToString(), "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 Environment.Exit(1);
             }
         }
