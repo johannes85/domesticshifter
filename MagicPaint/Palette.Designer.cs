@@ -37,8 +37,9 @@
             this.BackColor = System.Drawing.Color.White;
             this.Name = "Palette";
             this.Load += new System.EventHandler(this.Palette_Load);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Palette_MouseClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Palette_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Palette_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Palette_MouseUp);
             this.ResumeLayout(false);
 
         }

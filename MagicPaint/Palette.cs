@@ -18,6 +18,8 @@ namespace MagicPaint
         private Pen penCursor;
         private double currentHue;
         private int hueBarWidth;
+        private Boolean selectHueMode;
+        private Boolean mouseDown;
 
         public event EventHandler<Color> OnColorPicked;
 
@@ -46,6 +48,8 @@ namespace MagicPaint
 
             currentHue = 0;
             hueBarWidth = 25;
+            mouseDown = false;
+            selectHueMode = false;
             penCursor = new Pen(Color.White);
         }
 
@@ -126,40 +130,59 @@ namespace MagicPaint
             }
         }
 
-        private void Palette_MouseClick(object sender, MouseEventArgs e)
+        private void Palette_MouseMove(object sender, MouseEventArgs e)
         {
-            Color color = ((Bitmap)BackgroundImage).GetPixel(e.X, e.Y);
-            if (OnColorPicked != null)
+            if (mouseDown)
             {
                 PickColor(e.X, e.Y);
             }
         }
 
-        private void Palette_MouseMove(object sender, MouseEventArgs e)
+        private void Palette_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            StartPickColor(e.X, e.Y);
+            PickColor(e.X, e.Y);
+        }
+
+        private void Palette_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        private void StartPickColor(int x, int y)
+        {
+            int startHueBar = Width - hueBarWidth;
+            if (Type == ColorType.Type24bit && x >= startHueBar)
             {
-                PickColor(e.X, e.Y);
+                selectHueMode = true;
             }
+            else
+            {
+                selectHueMode = false;
+            }
+            mouseDown = true;
         }
 
         private void PickColor(int x, int y)
         {
             if (x > 0 && y > 0 && x < Width && y < Height)
             {
-                Color color = ((Bitmap)BackgroundImage).GetPixel(x, y);
-
-                int startHueBar = Width - hueBarWidth;
-                if (Type == ColorType.Type24bit && x >= startHueBar)
+                if (selectHueMode)
                 {
                     currentHue = 359.0 / (double)Height * (double)y;
                     RefreshPalette();
                 }
                 else
                 {
-                    if (OnColorPicked != null)
+                    int startHueBar = Width - hueBarWidth;
+                    if (x < startHueBar)
                     {
-                        OnColorPicked(this, color);
+                        Color color = ((Bitmap)BackgroundImage).GetPixel(x, y);
+
+                        if (OnColorPicked != null)
+                        {
+                            OnColorPicked(this, color);
+                        }
                     }
                 }
             }
