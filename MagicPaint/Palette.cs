@@ -48,6 +48,11 @@ namespace MagicPaint
         {
             InitializeComponent();
 
+            SetStyle(
+                ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint,
+                true
+            );
+
             currentColorHue = 0;
             currentColorSat = 1.0;
             currentColorVal = 1.0;
@@ -84,7 +89,6 @@ namespace MagicPaint
 
         private void Draw1BitPalette(Bitmap buffer)
         {
-            
             int xSplit = (int)Math.Round((double)Width / 2);
             Brush blackBrush = Brushes.Black;
             Brush whiteBrush = Brushes.White;
@@ -97,6 +101,9 @@ namespace MagicPaint
 
         private void Draw8BitPalette(Bitmap buffer)
         {
+            FastBitmap fastBuffer = new FastBitmap(buffer);
+            fastBuffer.LockImage();
+
             int xSplit = (int)Math.Round((double)Width / 2);
             for (int x = 0; x < Width; x++)
             {
@@ -104,15 +111,20 @@ namespace MagicPaint
                 Color currentColor = Color.FromArgb(colorPart, colorPart, colorPart);
                 for (int y = 0; y < Height; y++)
                 {
-                    buffer.SetPixel(x, y, currentColor);
+                    fastBuffer.SetPixel(x, y, currentColor);
                 }
             }
+
+            fastBuffer.UnlockImage();
         }
 
         private void Draw24BitPalette(Bitmap buffer)
         {
             int startHueBar = Width - hueBarWidth;
             int pickerWidth = startHueBar - 1;
+
+            FastBitmap fastBuffer = new FastBitmap(buffer);
+            fastBuffer.LockImage();
 
             for (int y = 0; y < Height; y++)
             {
@@ -121,7 +133,7 @@ namespace MagicPaint
                 for (int x = 0; x <= pickerWidth; x++)
                 {
                     int sat = (int)Math.Round(100.0 / (double)pickerWidth * (double)x);
-                    buffer.SetPixel(x, y, ColorFromHSV(currentColorHue, (double)sat * 0.01, (double)val * 0.01));
+                    fastBuffer.SetPixel(x, y, ColorFromHSV(currentColorHue, (double)sat * 0.01, (double)val * 0.01));
                 }
 
                 double hue = 359.0 / (double)Height * (double)y;
@@ -129,9 +141,11 @@ namespace MagicPaint
 
                 for (int x = 0; x < hueBarWidth; x++)
                 {
-                    buffer.SetPixel(startHueBar + x, y, currentColor);
+                    fastBuffer.SetPixel(startHueBar + x, y, currentColor);
                 }
             }
+
+            fastBuffer.UnlockImage();
         }
 
         private void Palette_MouseMove(object sender, MouseEventArgs e)
@@ -234,6 +248,7 @@ namespace MagicPaint
                 return Color.FromArgb(255, v, p, q);
         }
 
+        // Thanks to: http://stackoverflow.com/a/1626232/894982
         private void ColorToHSV(Color color, out double hue, out double saturation, out double value)
         {
             int max = Math.Max(color.R, Math.Max(color.G, color.B));
