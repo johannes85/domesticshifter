@@ -182,6 +182,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\removepage.png" />
+    <None Include="Resources\imageadd.png" />
+    <None Include="Resources\save.png" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\newdoc.png" />
+    <None Include="Resources\newpage.png" />
+    <None Include="Resources\open.png" />
+    <None Include="Resources\picture.png" />
+    <None Include="Resources\fill_color.png" />
+    <None Include="Resources\draw_brush.png" />
+    <None Include="Resources\device.png" />
+    <None Include="Resources\color_picker.png" />
+    <None Include="Resources\arrow_right.png" />
+    <None Include="Resources\arrow_left.png" />
+    <None Include="Resources\cursors\fill.cur" />
+    <None Include="Resources\cursors\pipette.cur" />
+    <None Include="Resources\cursors\brush.cur" />
     <None Include="Resources\fill-color.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

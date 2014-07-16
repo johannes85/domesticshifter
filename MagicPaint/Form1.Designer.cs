@@ -30,31 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.trackFrames = new System.Windows.Forms.TrackBar();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lstFileInfos = new System.Windows.Forms.ListView();
-            this.key = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pnlFrames = new System.Windows.Forms.GroupBox();
-            this.lblFrameNumber = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnToolFill = new System.Windows.Forms.Button();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.trackZoom = new System.Windows.Forms.TrackBar();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pnlCurrentColor = new System.Windows.Forms.PictureBox();
-            this.btnToolColorPicker = new System.Windows.Forms.Button();
-            this.btnToolBrush = new System.Windows.Forms.Button();
-            this.btnAddFrameFromImage = new System.Windows.Forms.Button();
-            this.btnRemoveFrame = new System.Windows.Forms.Button();
-            this.btnAddFrame = new System.Windows.Forms.Button();
-            this.btnResetFrame = new System.Windows.Forms.Button();
-            this.btnSaveFrame = new System.Windows.Forms.Button();
-            this.btnNextFrame = new System.Windows.Forms.Button();
-            this.btnPreviousFrame = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnOpenFile = new System.Windows.Forms.ToolStripButton();
             this.btnImportFile = new System.Windows.Forms.ToolStripButton();
@@ -62,6 +37,31 @@
             this.btnSaveAs = new System.Windows.Forms.ToolStripButton();
             this.btnUploadToDevice = new System.Windows.Forms.ToolStripButton();
             this.btnAbout = new System.Windows.Forms.ToolStripButton();
+            this.trackFrames = new System.Windows.Forms.TrackBar();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lstFileInfos = new System.Windows.Forms.ListView();
+            this.key = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.pnlFrames = new System.Windows.Forms.GroupBox();
+            this.btnAddFrameFromImage = new System.Windows.Forms.Button();
+            this.btnRemoveFrame = new System.Windows.Forms.Button();
+            this.btnAddFrame = new System.Windows.Forms.Button();
+            this.btnResetFrame = new System.Windows.Forms.Button();
+            this.btnSaveFrame = new System.Windows.Forms.Button();
+            this.lblFrameNumber = new System.Windows.Forms.Label();
+            this.btnNextFrame = new System.Windows.Forms.Button();
+            this.btnPreviousFrame = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnToolFill = new System.Windows.Forms.Button();
+            this.pnlCurrentColor = new System.Windows.Forms.PictureBox();
+            this.btnToolColorPicker = new System.Windows.Forms.Button();
+            this.btnToolBrush = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.trackZoom = new System.Windows.Forms.TrackBar();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.palette1 = new MagicPaint.Palette();
             this.magicPixler1 = new MagicPaint.MagicPixler();
             this.toolStrip1.SuspendLayout();
@@ -69,10 +69,10 @@
             this.groupBox1.SuspendLayout();
             this.pnlFrames.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCurrentColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCurrentColor)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -90,237 +90,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1024, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // trackFrames
-            // 
-            this.trackFrames.Location = new System.Drawing.Point(6, 48);
-            this.trackFrames.Name = "trackFrames";
-            this.trackFrames.Size = new System.Drawing.Size(188, 45);
-            this.trackFrames.TabIndex = 2;
-            this.trackFrames.Scroll += new System.EventHandler(this.trackFrames_Scroll);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.lstFileInfos);
-            this.groupBox1.Location = new System.Drawing.Point(812, 202);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 181);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "File Infos";
-            // 
-            // lstFileInfos
-            // 
-            this.lstFileInfos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.key,
-            this.value});
-            this.lstFileInfos.Location = new System.Drawing.Point(7, 20);
-            this.lstFileInfos.Name = "lstFileInfos";
-            this.lstFileInfos.Size = new System.Drawing.Size(187, 155);
-            this.lstFileInfos.TabIndex = 0;
-            this.lstFileInfos.UseCompatibleStateImageBehavior = false;
-            this.lstFileInfos.View = System.Windows.Forms.View.Details;
-            // 
-            // key
-            // 
-            this.key.Text = "Key";
-            this.key.Width = 74;
-            // 
-            // value
-            // 
-            this.value.Text = "Value";
-            // 
-            // pnlFrames
-            // 
-            this.pnlFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlFrames.Controls.Add(this.btnAddFrameFromImage);
-            this.pnlFrames.Controls.Add(this.btnRemoveFrame);
-            this.pnlFrames.Controls.Add(this.btnAddFrame);
-            this.pnlFrames.Controls.Add(this.btnResetFrame);
-            this.pnlFrames.Controls.Add(this.btnSaveFrame);
-            this.pnlFrames.Controls.Add(this.lblFrameNumber);
-            this.pnlFrames.Controls.Add(this.btnNextFrame);
-            this.pnlFrames.Controls.Add(this.btnPreviousFrame);
-            this.pnlFrames.Controls.Add(this.trackFrames);
-            this.pnlFrames.Location = new System.Drawing.Point(812, 389);
-            this.pnlFrames.Name = "pnlFrames";
-            this.pnlFrames.Size = new System.Drawing.Size(200, 120);
-            this.pnlFrames.TabIndex = 4;
-            this.pnlFrames.TabStop = false;
-            this.pnlFrames.Text = "Frames";
-            // 
-            // lblFrameNumber
-            // 
-            this.lblFrameNumber.Location = new System.Drawing.Point(47, 19);
-            this.lblFrameNumber.Name = "lblFrameNumber";
-            this.lblFrameNumber.Size = new System.Drawing.Size(106, 23);
-            this.lblFrameNumber.TabIndex = 7;
-            this.lblFrameNumber.Text = "0";
-            this.lblFrameNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnToolFill);
-            this.panel1.Controls.Add(this.pnlCurrentColor);
-            this.panel1.Controls.Add(this.btnToolColorPicker);
-            this.panel1.Controls.Add(this.btnToolBrush);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 25);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(46, 604);
-            this.panel1.TabIndex = 6;
-            // 
-            // btnToolFill
-            // 
-            this.btnToolFill.Image = global::MagicPaint.Properties.Resources.fill_color;
-            this.btnToolFill.Location = new System.Drawing.Point(3, 95);
-            this.btnToolFill.Name = "btnToolFill";
-            this.btnToolFill.Size = new System.Drawing.Size(40, 40);
-            this.btnToolFill.TabIndex = 3;
-            this.btnToolFill.UseVisualStyleBackColor = true;
-            this.btnToolFill.Click += new System.EventHandler(this.btnToolFill_Click);
-            // 
-            // trackZoom
-            // 
-            this.trackZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackZoom.Location = new System.Drawing.Point(74, 590);
-            this.trackZoom.Maximum = 3000;
-            this.trackZoom.Minimum = 100;
-            this.trackZoom.Name = "trackZoom";
-            this.trackZoom.Size = new System.Drawing.Size(732, 45);
-            this.trackZoom.TabIndex = 8;
-            this.trackZoom.TickFrequency = 10;
-            this.trackZoom.Value = 1600;
-            this.trackZoom.Scroll += new System.EventHandler(this.trackZoom_Scroll);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.palette1);
-            this.groupBox2.Location = new System.Drawing.Point(812, 28);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 168);
-            this.groupBox2.TabIndex = 10;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Palette";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(56, 598);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pnlCurrentColor
-            // 
-            this.pnlCurrentColor.BackColor = System.Drawing.Color.White;
-            this.pnlCurrentColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCurrentColor.Location = new System.Drawing.Point(3, 141);
-            this.pnlCurrentColor.Name = "pnlCurrentColor";
-            this.pnlCurrentColor.Size = new System.Drawing.Size(40, 40);
-            this.pnlCurrentColor.TabIndex = 2;
-            this.pnlCurrentColor.TabStop = false;
-            this.pnlCurrentColor.Click += new System.EventHandler(this.pnlCurrentColor_Click);
-            // 
-            // btnToolColorPicker
-            // 
-            this.btnToolColorPicker.Image = global::MagicPaint.Properties.Resources.color_picker;
-            this.btnToolColorPicker.Location = new System.Drawing.Point(3, 49);
-            this.btnToolColorPicker.Name = "btnToolColorPicker";
-            this.btnToolColorPicker.Size = new System.Drawing.Size(40, 40);
-            this.btnToolColorPicker.TabIndex = 1;
-            this.btnToolColorPicker.UseVisualStyleBackColor = true;
-            this.btnToolColorPicker.Click += new System.EventHandler(this.btnToolColorPicker_Click);
-            // 
-            // btnToolBrush
-            // 
-            this.btnToolBrush.BackColor = System.Drawing.SystemColors.Control;
-            this.btnToolBrush.Image = global::MagicPaint.Properties.Resources.draw_brush;
-            this.btnToolBrush.Location = new System.Drawing.Point(3, 3);
-            this.btnToolBrush.Name = "btnToolBrush";
-            this.btnToolBrush.Size = new System.Drawing.Size(40, 40);
-            this.btnToolBrush.TabIndex = 0;
-            this.btnToolBrush.UseVisualStyleBackColor = false;
-            this.btnToolBrush.Click += new System.EventHandler(this.btnToolBrush_Click_1);
-            // 
-            // btnAddFrameFromImage
-            // 
-            this.btnAddFrameFromImage.Image = global::MagicPaint.Properties.Resources.imageadd;
-            this.btnAddFrameFromImage.Location = new System.Drawing.Point(71, 88);
-            this.btnAddFrameFromImage.Name = "btnAddFrameFromImage";
-            this.btnAddFrameFromImage.Size = new System.Drawing.Size(26, 26);
-            this.btnAddFrameFromImage.TabIndex = 12;
-            this.btnAddFrameFromImage.UseVisualStyleBackColor = true;
-            this.btnAddFrameFromImage.Click += new System.EventHandler(this.btnAddFrameFromImage_Click);
-            // 
-            // btnRemoveFrame
-            // 
-            this.btnRemoveFrame.Image = global::MagicPaint.Properties.Resources.removepage;
-            this.btnRemoveFrame.Location = new System.Drawing.Point(39, 88);
-            this.btnRemoveFrame.Name = "btnRemoveFrame";
-            this.btnRemoveFrame.Size = new System.Drawing.Size(26, 26);
-            this.btnRemoveFrame.TabIndex = 11;
-            this.btnRemoveFrame.UseVisualStyleBackColor = true;
-            this.btnRemoveFrame.Click += new System.EventHandler(this.btnRemoveFrame_Click);
-            // 
-            // btnAddFrame
-            // 
-            this.btnAddFrame.Image = global::MagicPaint.Properties.Resources.newpage;
-            this.btnAddFrame.Location = new System.Drawing.Point(7, 88);
-            this.btnAddFrame.Name = "btnAddFrame";
-            this.btnAddFrame.Size = new System.Drawing.Size(26, 26);
-            this.btnAddFrame.TabIndex = 10;
-            this.btnAddFrame.UseVisualStyleBackColor = true;
-            this.btnAddFrame.Click += new System.EventHandler(this.btnAddFrame_Click);
-            // 
-            // btnResetFrame
-            // 
-            this.btnResetFrame.Image = global::MagicPaint.Properties.Resources.undo;
-            this.btnResetFrame.Location = new System.Drawing.Point(168, 88);
-            this.btnResetFrame.Name = "btnResetFrame";
-            this.btnResetFrame.Size = new System.Drawing.Size(26, 26);
-            this.btnResetFrame.TabIndex = 9;
-            this.btnResetFrame.UseVisualStyleBackColor = true;
-            this.btnResetFrame.Click += new System.EventHandler(this.btnResetFrame_Click);
-            // 
-            // btnSaveFrame
-            // 
-            this.btnSaveFrame.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveFrame.Image")));
-            this.btnSaveFrame.Location = new System.Drawing.Point(136, 88);
-            this.btnSaveFrame.Name = "btnSaveFrame";
-            this.btnSaveFrame.Size = new System.Drawing.Size(26, 26);
-            this.btnSaveFrame.TabIndex = 8;
-            this.btnSaveFrame.UseVisualStyleBackColor = true;
-            this.btnSaveFrame.Click += new System.EventHandler(this.btnSaveFrame_Click);
-            // 
-            // btnNextFrame
-            // 
-            this.btnNextFrame.Image = global::MagicPaint.Properties.Resources.arrow_right;
-            this.btnNextFrame.Location = new System.Drawing.Point(159, 19);
-            this.btnNextFrame.Name = "btnNextFrame";
-            this.btnNextFrame.Size = new System.Drawing.Size(35, 23);
-            this.btnNextFrame.TabIndex = 6;
-            this.btnNextFrame.UseVisualStyleBackColor = true;
-            this.btnNextFrame.Click += new System.EventHandler(this.btnNextFrame_Click);
-            // 
-            // btnPreviousFrame
-            // 
-            this.btnPreviousFrame.Image = global::MagicPaint.Properties.Resources.arrow_left;
-            this.btnPreviousFrame.Location = new System.Drawing.Point(6, 19);
-            this.btnPreviousFrame.Name = "btnPreviousFrame";
-            this.btnPreviousFrame.Size = new System.Drawing.Size(35, 23);
-            this.btnPreviousFrame.TabIndex = 5;
-            this.btnPreviousFrame.UseVisualStyleBackColor = true;
-            this.btnPreviousFrame.Click += new System.EventHandler(this.btnPreviousFrame_Click);
             // 
             // btnNew
             // 
@@ -385,6 +154,237 @@
             this.btnAbout.Text = "About";
             this.btnAbout.Visible = false;
             // 
+            // trackFrames
+            // 
+            this.trackFrames.Location = new System.Drawing.Point(6, 48);
+            this.trackFrames.Name = "trackFrames";
+            this.trackFrames.Size = new System.Drawing.Size(188, 45);
+            this.trackFrames.TabIndex = 2;
+            this.trackFrames.Scroll += new System.EventHandler(this.trackFrames_Scroll);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.lstFileInfos);
+            this.groupBox1.Location = new System.Drawing.Point(812, 202);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 181);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "File Infos";
+            // 
+            // lstFileInfos
+            // 
+            this.lstFileInfos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.key,
+            this.value});
+            this.lstFileInfos.Location = new System.Drawing.Point(7, 20);
+            this.lstFileInfos.Name = "lstFileInfos";
+            this.lstFileInfos.Size = new System.Drawing.Size(187, 155);
+            this.lstFileInfos.TabIndex = 0;
+            this.lstFileInfos.UseCompatibleStateImageBehavior = false;
+            this.lstFileInfos.View = System.Windows.Forms.View.Details;
+            // 
+            // key
+            // 
+            this.key.Text = "Key";
+            this.key.Width = 74;
+            // 
+            // value
+            // 
+            this.value.Text = "Value";
+            // 
+            // pnlFrames
+            // 
+            this.pnlFrames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlFrames.Controls.Add(this.btnAddFrameFromImage);
+            this.pnlFrames.Controls.Add(this.btnRemoveFrame);
+            this.pnlFrames.Controls.Add(this.btnAddFrame);
+            this.pnlFrames.Controls.Add(this.btnResetFrame);
+            this.pnlFrames.Controls.Add(this.btnSaveFrame);
+            this.pnlFrames.Controls.Add(this.lblFrameNumber);
+            this.pnlFrames.Controls.Add(this.btnNextFrame);
+            this.pnlFrames.Controls.Add(this.btnPreviousFrame);
+            this.pnlFrames.Controls.Add(this.trackFrames);
+            this.pnlFrames.Location = new System.Drawing.Point(812, 389);
+            this.pnlFrames.Name = "pnlFrames";
+            this.pnlFrames.Size = new System.Drawing.Size(200, 120);
+            this.pnlFrames.TabIndex = 4;
+            this.pnlFrames.TabStop = false;
+            this.pnlFrames.Text = "Frames";
+            // 
+            // btnAddFrameFromImage
+            // 
+            this.btnAddFrameFromImage.Image = global::MagicPaint.Properties.Resources.imageadd;
+            this.btnAddFrameFromImage.Location = new System.Drawing.Point(71, 88);
+            this.btnAddFrameFromImage.Name = "btnAddFrameFromImage";
+            this.btnAddFrameFromImage.Size = new System.Drawing.Size(26, 26);
+            this.btnAddFrameFromImage.TabIndex = 12;
+            this.btnAddFrameFromImage.UseVisualStyleBackColor = true;
+            this.btnAddFrameFromImage.Click += new System.EventHandler(this.btnAddFrameFromImage_Click);
+            // 
+            // btnRemoveFrame
+            // 
+            this.btnRemoveFrame.Image = global::MagicPaint.Properties.Resources.removepage;
+            this.btnRemoveFrame.Location = new System.Drawing.Point(39, 88);
+            this.btnRemoveFrame.Name = "btnRemoveFrame";
+            this.btnRemoveFrame.Size = new System.Drawing.Size(26, 26);
+            this.btnRemoveFrame.TabIndex = 11;
+            this.btnRemoveFrame.UseVisualStyleBackColor = true;
+            this.btnRemoveFrame.Click += new System.EventHandler(this.btnRemoveFrame_Click);
+            // 
+            // btnAddFrame
+            // 
+            this.btnAddFrame.Image = global::MagicPaint.Properties.Resources.newpage;
+            this.btnAddFrame.Location = new System.Drawing.Point(7, 88);
+            this.btnAddFrame.Name = "btnAddFrame";
+            this.btnAddFrame.Size = new System.Drawing.Size(26, 26);
+            this.btnAddFrame.TabIndex = 10;
+            this.btnAddFrame.UseVisualStyleBackColor = true;
+            this.btnAddFrame.Click += new System.EventHandler(this.btnAddFrame_Click);
+            // 
+            // btnResetFrame
+            // 
+            this.btnResetFrame.Image = global::MagicPaint.Properties.Resources.undo;
+            this.btnResetFrame.Location = new System.Drawing.Point(168, 88);
+            this.btnResetFrame.Name = "btnResetFrame";
+            this.btnResetFrame.Size = new System.Drawing.Size(26, 26);
+            this.btnResetFrame.TabIndex = 9;
+            this.btnResetFrame.UseVisualStyleBackColor = true;
+            this.btnResetFrame.Click += new System.EventHandler(this.btnResetFrame_Click);
+            // 
+            // btnSaveFrame
+            // 
+            this.btnSaveFrame.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveFrame.Image")));
+            this.btnSaveFrame.Location = new System.Drawing.Point(136, 88);
+            this.btnSaveFrame.Name = "btnSaveFrame";
+            this.btnSaveFrame.Size = new System.Drawing.Size(26, 26);
+            this.btnSaveFrame.TabIndex = 8;
+            this.btnSaveFrame.UseVisualStyleBackColor = true;
+            this.btnSaveFrame.Click += new System.EventHandler(this.btnSaveFrame_Click);
+            // 
+            // lblFrameNumber
+            // 
+            this.lblFrameNumber.Location = new System.Drawing.Point(47, 19);
+            this.lblFrameNumber.Name = "lblFrameNumber";
+            this.lblFrameNumber.Size = new System.Drawing.Size(106, 23);
+            this.lblFrameNumber.TabIndex = 7;
+            this.lblFrameNumber.Text = "0";
+            this.lblFrameNumber.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnNextFrame
+            // 
+            this.btnNextFrame.Image = global::MagicPaint.Properties.Resources.arrow_right;
+            this.btnNextFrame.Location = new System.Drawing.Point(159, 19);
+            this.btnNextFrame.Name = "btnNextFrame";
+            this.btnNextFrame.Size = new System.Drawing.Size(35, 23);
+            this.btnNextFrame.TabIndex = 6;
+            this.btnNextFrame.UseVisualStyleBackColor = true;
+            this.btnNextFrame.Click += new System.EventHandler(this.btnNextFrame_Click);
+            // 
+            // btnPreviousFrame
+            // 
+            this.btnPreviousFrame.Image = global::MagicPaint.Properties.Resources.arrow_left;
+            this.btnPreviousFrame.Location = new System.Drawing.Point(6, 19);
+            this.btnPreviousFrame.Name = "btnPreviousFrame";
+            this.btnPreviousFrame.Size = new System.Drawing.Size(35, 23);
+            this.btnPreviousFrame.TabIndex = 5;
+            this.btnPreviousFrame.UseVisualStyleBackColor = true;
+            this.btnPreviousFrame.Click += new System.EventHandler(this.btnPreviousFrame_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnToolFill);
+            this.panel1.Controls.Add(this.pnlCurrentColor);
+            this.panel1.Controls.Add(this.btnToolColorPicker);
+            this.panel1.Controls.Add(this.btnToolBrush);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 25);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(46, 604);
+            this.panel1.TabIndex = 6;
+            // 
+            // btnToolFill
+            // 
+            this.btnToolFill.Image = global::MagicPaint.Properties.Resources.fill_color;
+            this.btnToolFill.Location = new System.Drawing.Point(3, 95);
+            this.btnToolFill.Name = "btnToolFill";
+            this.btnToolFill.Size = new System.Drawing.Size(40, 40);
+            this.btnToolFill.TabIndex = 3;
+            this.btnToolFill.UseVisualStyleBackColor = true;
+            this.btnToolFill.Click += new System.EventHandler(this.btnToolFill_Click);
+            // 
+            // pnlCurrentColor
+            // 
+            this.pnlCurrentColor.BackColor = System.Drawing.Color.White;
+            this.pnlCurrentColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCurrentColor.Location = new System.Drawing.Point(3, 141);
+            this.pnlCurrentColor.Name = "pnlCurrentColor";
+            this.pnlCurrentColor.Size = new System.Drawing.Size(40, 40);
+            this.pnlCurrentColor.TabIndex = 2;
+            this.pnlCurrentColor.TabStop = false;
+            this.pnlCurrentColor.Click += new System.EventHandler(this.pnlCurrentColor_Click);
+            // 
+            // btnToolColorPicker
+            // 
+            this.btnToolColorPicker.Image = global::MagicPaint.Properties.Resources.color_picker;
+            this.btnToolColorPicker.Location = new System.Drawing.Point(3, 49);
+            this.btnToolColorPicker.Name = "btnToolColorPicker";
+            this.btnToolColorPicker.Size = new System.Drawing.Size(40, 40);
+            this.btnToolColorPicker.TabIndex = 1;
+            this.btnToolColorPicker.UseVisualStyleBackColor = true;
+            this.btnToolColorPicker.Click += new System.EventHandler(this.btnToolColorPicker_Click);
+            // 
+            // btnToolBrush
+            // 
+            this.btnToolBrush.BackColor = System.Drawing.SystemColors.Control;
+            this.btnToolBrush.Image = global::MagicPaint.Properties.Resources.draw_brush;
+            this.btnToolBrush.Location = new System.Drawing.Point(3, 3);
+            this.btnToolBrush.Name = "btnToolBrush";
+            this.btnToolBrush.Size = new System.Drawing.Size(40, 40);
+            this.btnToolBrush.TabIndex = 0;
+            this.btnToolBrush.UseVisualStyleBackColor = false;
+            this.btnToolBrush.Click += new System.EventHandler(this.btnToolBrush_Click_1);
+            // 
+            // trackZoom
+            // 
+            this.trackZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackZoom.Location = new System.Drawing.Point(74, 590);
+            this.trackZoom.Maximum = 3000;
+            this.trackZoom.Minimum = 100;
+            this.trackZoom.Name = "trackZoom";
+            this.trackZoom.Size = new System.Drawing.Size(732, 45);
+            this.trackZoom.TabIndex = 8;
+            this.trackZoom.TickFrequency = 10;
+            this.trackZoom.Value = 1600;
+            this.trackZoom.Scroll += new System.EventHandler(this.trackZoom_Scroll);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.palette1);
+            this.groupBox2.Location = new System.Drawing.Point(812, 28);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 168);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Palette";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(56, 598);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
+            // 
             // palette1
             // 
             this.palette1.BackColor = System.Drawing.Color.White;
@@ -403,7 +403,6 @@
             this.magicPixler1.BackColor = System.Drawing.Color.White;
             this.magicPixler1.CurrentColor = System.Drawing.Color.Black;
             this.magicPixler1.CurrentTool = MagicPaint.MagicPixler.Tool.Brush;
-            this.magicPixler1.Cursor = System.Windows.Forms.Cursors.Default;
             this.magicPixler1.EditEnabled = true;
             this.magicPixler1.Location = new System.Drawing.Point(49, 28);
             this.magicPixler1.Name = "magicPixler1";
@@ -436,10 +435,10 @@
             this.pnlFrames.ResumeLayout(false);
             this.pnlFrames.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlCurrentColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pnlCurrentColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

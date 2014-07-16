@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 namespace MagicPaint
 {
@@ -36,6 +37,7 @@ namespace MagicPaint
         private Bitmap buffer;
         private Pen penHelpingLines;
         private Pen penCursor;
+        private Tool currentTool;
 
         private Point cursorPosition;
         private bool cursorEnabled;
@@ -47,7 +49,29 @@ namespace MagicPaint
         public event EventHandler OnChanged;
 
         public Boolean EditEnabled { get; set; }
-        public Tool CurrentTool { get; set; }
+        public Tool CurrentTool {
+            get
+            {
+                return currentTool;
+            }
+            set
+            {
+                currentTool = value;
+
+                switch (currentTool)
+                {
+                    case Tool.Brush:
+                        Cursor = GetCursor("brush");
+                        break;
+                    case Tool.ColorPicker:
+                        Cursor = GetCursor("pipette");
+                        break;
+                    case Tool.Fill:
+                        Cursor = GetCursor("fill");
+                        break;
+                }
+            } 
+        }
         public Color CurrentColor { get; set; }
         public int PixelSize
         {
@@ -218,6 +242,16 @@ namespace MagicPaint
         private Boolean EqualColor(Color color1, Color color2)
         {
             return (color1.ToArgb() == color2.ToArgb());
+        }
+
+        private Cursor GetCursor(string cursorName)
+        {
+            var buffer = Properties.Resources.ResourceManager.GetObject(cursorName) as byte[];
+
+            using (var m = new MemoryStream(buffer))
+            {
+                return new Cursor(m);
+            }
         }
 
         private void MagicPixler_Resize(object sender, EventArgs e)
