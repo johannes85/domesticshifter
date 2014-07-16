@@ -66,7 +66,8 @@ namespace MagicPaint
         public enum Tool
         {
             Brush = 0,
-            ColorPicker = 1
+            ColorPicker = 1,
+            Fill = 2
         }
 
         public MagicPixler()
@@ -174,7 +175,49 @@ namespace MagicPaint
                         OnColorChoose(this, color);
                     }
                 }
+                else if (CurrentTool == Tool.Fill)
+                {
+                    FloodFill(x, y, image.GetPixel(x, y), CurrentColor);
+                }
             }
+        }
+
+        private void FloodFill(int x, int y, Color oldColor, Color newColor)
+        {
+            Stack<Point> floodFillStack = new Stack<Point>();
+            floodFillStack.Push(new Point(x, y));
+
+            while (floodFillStack.Count > 0)
+            {
+                Point currentPoint = floodFillStack.Pop();
+                Color currentColor = image.GetPixel(currentPoint.X, currentPoint.Y);
+
+                if (EqualColor(currentColor, oldColor) && !EqualColor(currentColor, newColor))
+                {
+                    image.SetPixel(currentPoint.X, currentPoint.Y, newColor);
+                    if (currentPoint.X > 0)
+                    {
+                        floodFillStack.Push(new Point(currentPoint.X - 1, currentPoint.Y));
+                    }
+                    if (currentPoint.Y > 0)
+                    {
+                        floodFillStack.Push(new Point(currentPoint.X, currentPoint.Y - 1));
+                    }
+                    if ((currentPoint.X + 1) < image.Width)
+                    {
+                        floodFillStack.Push(new Point(currentPoint.X + 1, currentPoint.Y));
+                    }
+                    if ((currentPoint.Y + 1) < image.Height)
+                    {
+                        floodFillStack.Push(new Point(currentPoint.X, currentPoint.Y + 1));
+                    }
+                }
+            }
+        }
+
+        private Boolean EqualColor(Color color1, Color color2)
+        {
+            return (color1.ToArgb() == color2.ToArgb());
         }
 
         private void MagicPixler_Resize(object sender, EventArgs e)

@@ -122,6 +122,11 @@ namespace MagicPaint
             SetCurrentTool(MagicPixler.Tool.Brush); 
         }
 
+        private void btnToolFill_Click(object sender, EventArgs e)
+        {
+            SetCurrentTool(MagicPixler.Tool.Fill); 
+        }
+
         private void pnlCurrentColor_Click(object sender, EventArgs e)
         {
             colorDialog1.FullOpen = true;
@@ -344,6 +349,7 @@ namespace MagicPaint
         {
             btnToolBrush.Enabled = true;
             btnToolColorPicker.Enabled = true;
+            btnToolFill.Enabled = true;
             switch (tool)
             {
                 case MagicPixler.Tool.Brush:
@@ -351,6 +357,9 @@ namespace MagicPaint
                     break;
                 case MagicPixler.Tool.ColorPicker:
                     btnToolColorPicker.Enabled = false;
+                    break;
+                case MagicPixler.Tool.Fill:
+                    btnToolFill.Enabled = false;
                     break;
             }
             magicPixler1.CurrentTool = tool;
@@ -433,5 +442,6 @@ namespace MagicPaint
         {
             magicPixler1.PixelSize = (int)Math.Round(1.0 / 100.0 * percent, 0);
         }
+      
     }
 }
