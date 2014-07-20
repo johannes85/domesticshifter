@@ -173,24 +173,27 @@ namespace MagicPaint
             DialogResult res = openFileDialog1.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
-                Bitmap sourceImage = new Bitmap(openFileDialog1.FileName);
-                int targetHeight = sourceImage.Height > 16 ? 16 : sourceImage.Height;
-                MagicBitmap newBitmap = new MagicBitmap(MagicBitmap.SubType.Bitmap, sourceImage.Width, targetHeight, MagicBitmap.BitTypes.Type24bit, 0, 100);
-
-                FrameDimension dimension = new FrameDimension(sourceImage.FrameDimensionsList[0]);
-                for (int frame = 0; frame < sourceImage.GetFrameCount(dimension); frame++)
+                using (Bitmap sourceImage = new Bitmap(openFileDialog1.FileName))
                 {
-                    sourceImage.SelectActiveFrame(dimension, frame);
-                    Bitmap newFrame = new Bitmap(newBitmap.Width, newBitmap.Height);
-                    using (Graphics g = Graphics.FromImage(newFrame))
-                    {
-                        g.DrawImage(sourceImage, 0, 0);
-                    }
-                    newBitmap.AddFrame(newFrame);
-                }
+                    int targetHeight = sourceImage.Height > 16 ? 16 : sourceImage.Height;
+                    MagicBitmap newBitmap = new MagicBitmap(MagicBitmap.SubType.Bitmap, sourceImage.Width, targetHeight, MagicBitmap.BitTypes.Type24bit, 0, 100);
 
-                newBitmap.RemoveFrame(0);
-                Bitmap = newBitmap;
+                    FrameDimension dimension = new FrameDimension(sourceImage.FrameDimensionsList[0]);
+                    for (int frame = 0; frame < sourceImage.GetFrameCount(dimension); frame++)
+                    {
+                        sourceImage.SelectActiveFrame(dimension, frame);
+                        Bitmap newFrame = new Bitmap(newBitmap.Width, newBitmap.Height);
+                        using (Graphics g = Graphics.FromImage(newFrame))
+                        {
+                            g.DrawImage(sourceImage, 0, 0);
+                        }
+                        newBitmap.AddFrame(newFrame);
+                    }
+
+                    newBitmap.RemoveFrame(0);
+                    Bitmap = newBitmap;
+                }
+               
                 currentFrame = 0;
                 RefreshGui();
             }
@@ -277,12 +280,15 @@ namespace MagicPaint
             DialogResult res = openFileDialog1.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
-                Bitmap newImage = new Bitmap(openFileDialog1.FileName);
-                Bitmap newFrame = new Bitmap(Bitmap.Width, Bitmap.Height);
-                using (Graphics g = Graphics.FromImage(newFrame)) {
-                    g.DrawImage(newImage, 0, 0);
+                using (Bitmap newImage = new Bitmap(openFileDialog1.FileName))
+                {
+                    Bitmap newFrame = new Bitmap(Bitmap.Width, Bitmap.Height);
+                    using (Graphics g = Graphics.FromImage(newFrame))
+                    {
+                        g.DrawImage(newImage, 0, 0);
+                    }
+                    Bitmap.AddFrame(newFrame);
                 }
-                Bitmap.AddFrame(newFrame);
                 RefreshGui();
                 SetCurrentFrameNumber(Bitmap.RealFramesCount - 1);
             }
