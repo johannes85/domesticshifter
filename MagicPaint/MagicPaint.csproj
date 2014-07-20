@@ -111,12 +111,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\draw-brush.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\color-picker.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MagicShifter\MagicShifter.csproj">
       <Project>{eb23d016-ae45-4868-b76e-cc67f34803f9}</Project>
       <Name>MagicShifter</Name>
@@ -127,55 +121,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\document-export.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\document-open-8.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\thumbnail-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\edit-undo-7.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\zoom.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\preferences-desktop-icons.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\document-open-folder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\image-x-generic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\zoom-select.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\document-save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\document-new.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\document-close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow-left.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\arrow-right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\edit-image-face-add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\insert-image.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\document-multiple.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\help-about.png" />
@@ -199,7 +145,6 @@
     <None Include="Resources\cursors\fill.cur" />
     <None Include="Resources\cursors\pipette.cur" />
     <None Include="Resources\cursors\brush.cur" />
-    <None Include="Resources\fill-color.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
